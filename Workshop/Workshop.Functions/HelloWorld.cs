@@ -17,13 +17,19 @@ namespace Workshop.Functions
         [Function("HelloWorld")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("Hello World received a request!");
 
+            // Parse Query parameter to string Collection
+            var queryDictionary = System.Web.HttpUtility.ParseQueryString(req.Url.Query);
+            // Checks if the keyword is passed into the query parameters, if not it returns World else it returns the keyword
+            var keyword = queryDictionary["keyword"] == null ? "World" : queryDictionary["keyword"];
+
+            // Build response
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            response.WriteString($"Hello {keyword}");
 
-            response.WriteString("Welcome to Azure Functions!");
-
+            // Send response
             return response;
         }
     }
