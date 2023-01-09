@@ -1,12 +1,9 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Workshop.Functions
 {
@@ -21,7 +18,7 @@ namespace Workshop.Functions
 
             // Extract keyword and assign "World" if empty, else the keyword gets assigned
             string keyword = req.Query["keyword"] == ((string)null) ? "World" : req.Query["keyword"];
-            string response = $"Hello {keyword}";
+            string response = $"Hello {keyword}!";
 
             // Fire response
             return new OkObjectResult(response);
