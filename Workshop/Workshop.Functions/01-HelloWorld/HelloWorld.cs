@@ -16,7 +16,7 @@ namespace Workshop.Functions
         {
             log.LogInformation("Hello World has been triggered");
             // Extract name and assign "World" if empty, else the name gets assigned
-            string name = req.Query["name"] == ((string)null) ? "World" : req.Query["name"];
+            string name = string.IsNullOrEmpty(req.Query["name"]) ? "World" : req.Query["name"];
             string response = $"Hello, {name}!";
             // Return response
             return new OkObjectResult(response);
