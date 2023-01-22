@@ -10,7 +10,7 @@ namespace Workshop.Functions.Helpers
 {
     public class BlobStorage
     {
-        public static async Task WriteMessage(BlockBlobClient blockBlobClient, string message)
+        public static async Task WriteMessage(AppendBlobClient appendBlobClient, string message)
         {
             using var stream = new MemoryStream();
 
@@ -18,7 +18,7 @@ namespace Workshop.Functions.Helpers
             await writer.WriteAsync(message);
             await writer.FlushAsync();
             stream.Position = 0;
-            await blockBlobClient.UploadAsync(stream);
+            await appendBlobClient.AppendBlockAsync(stream);
         }
 
         public static async Task<string> ReadFileContent(BlobBaseClient blockBlobClient)

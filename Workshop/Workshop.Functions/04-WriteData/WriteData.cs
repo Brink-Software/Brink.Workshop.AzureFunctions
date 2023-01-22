@@ -14,31 +14,26 @@ using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs.Specialized;
 using System.Text;
 using Workshop.Functions.Helpers;
+using System.Reflection.Metadata;
 
 namespace Workshop.Functions._04_CreateFile
 {
-    public static class CreateFile
+    public static class WriteData
     {
-        [FunctionName("create-file")]
+        [FunctionName("write-data")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [Blob("workshopdb/workshopdata", FileAccess.Write)] Stream myBlob,
             ILogger log)
         {
-            string containerName = req.Query["containerName"];
-            string fileName = req.Query["fileName"];
             string message = req.Query["message"];
-            var blobContainerClient = new BlobContainerClient("UseDevelopmentStorage=true", containerName);
-            await blobContainerClient.CreateIfNotExistsAsync();
-            var blockBlobClient = blobContainerClient.GetBlockBlobClient(fileName);
 
-            await BlobStorage.WriteMessage(blockBlobClient, message);
-            var result = await BlobStorage.ReadFileContent(blockBlobClient);
+            await using StreamWriter writer = new(myBlob, Encoding.UTF8);
+            writer.Write(message);
 
-            return new OkObjectResult(result);
+            return new OkObjectResult("Ok");
         }
-
-       
     }
 
-    
+
 }
