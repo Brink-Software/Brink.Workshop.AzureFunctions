@@ -1,20 +1,11 @@
-using System;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
 using System.Text;
-using Workshop.Functions.Helpers;
-using System.Reflection.Metadata;
 
 namespace Workshop.Functions._04_CreateFile
 {
