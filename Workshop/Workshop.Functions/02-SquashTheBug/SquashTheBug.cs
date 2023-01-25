@@ -24,7 +24,7 @@ public static class SquashTheBug
         [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
         ILogger log)
     {
-        log.LogInformation("Clean The Bug has been triggered");
+        log.LogInformation("Squash the Bug was triggered.");
 
         string role = req.Query["role"];
 
