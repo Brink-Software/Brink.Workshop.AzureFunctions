@@ -20,11 +20,12 @@ public static class Streams
         var reader = new StreamReader(req.Body);
         var body = reader.ReadToEnd();
 
-        string readResult = $"{body} striem";
+        string firstReadResult = body.Split('-')[0];
+        string secondReadResult = body.Split('-')[1];
 
         Stream stream = new MemoryStream();
         var writer = new StreamWriter(stream);
-        writer.Write(readResult);
+        writer.Write(firstReadResult + secondReadResult);
         writer.Flush();
         stream.Position = 0;
 
