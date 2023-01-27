@@ -12,23 +12,32 @@ public static class Streams
 {
     [FunctionName("Streams")]
     public static async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
         ILogger log)
     {
-        log.LogInformation("Streams has been triggered");
-
         var reader = new StreamReader(req.Body);
-        var body = reader.ReadToEnd();
+        var body = await reader.ReadToEndAsync();
 
-        string firstReadResult = body.Split('-')[0];
-        string secondReadResult = body.Split('-')[1];
+        var year = int.Parse(body);
 
-        Stream stream = new MemoryStream();
-        var writer = new StreamWriter(stream);
-        writer.Write(firstReadResult + secondReadResult);
-        writer.Flush();
-        stream.Position = 0;
+        bool result;
 
-        return new OkObjectResult(stream);
+        if (year % 400 == 0) result = true;
+        else if (year % 100 == 0) result = false;
+        else if (year % 4 == 0) result = true;
+        else result = false;
+
+        return new OkObjectResult(result);
+
+        // Extra challenge: return answer in a stream
+
+        // var stream = new MemoryStream();
+        // var writer = new StreamWriter(stream);
+            
+        // await writer.WriteAsync(result ? "true" : "false");
+        // await writer.FlushAsync();
+        // stream.Position = 0;
+
+        // return new OkObjectResult(stream);
     }
 }
