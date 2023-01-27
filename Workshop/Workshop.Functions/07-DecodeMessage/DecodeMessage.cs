@@ -1,9 +1,10 @@
-using Microsoft.Azure.WebJobs;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs;
 
-namespace Workshop.Functions._08_Queue
+namespace Workshop.Functions._07_DecodeMessage
 {
     public class DecodeMessage
     {
@@ -12,7 +13,8 @@ namespace Workshop.Functions._08_Queue
             [Blob("workshopdb/workshopsecretfile", FileAccess.Write)] Stream myBlob)
         {
             await using StreamWriter writer = new(myBlob, Encoding.UTF8);
-            await writer.WriteAsync(myQueueItem);
+            var decodedMassage = Encoding.UTF8.GetString(Convert.FromBase64String(myQueueItem));
+            await writer.WriteAsync(decodedMassage);
         }
     }
 }

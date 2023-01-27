@@ -1,10 +1,8 @@
 using System.IO;
 using System.Text;
-using Azure.Storage.Queues.Models;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
 
-namespace Workshop.Functions._06_AutoBackup
+namespace Workshop.Functions._06_CreateJob
 {
     public class CreateJob
     {
