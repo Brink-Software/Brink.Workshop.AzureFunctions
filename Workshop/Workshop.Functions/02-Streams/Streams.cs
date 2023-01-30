@@ -1,12 +1,12 @@
+using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using System.IO;
-using System.Threading.Tasks;
 
-namespace Workshop.Functions._03_Streams;
+namespace Workshop.Functions._02_Streams;
 
 public static class Streams
 {
@@ -28,16 +28,5 @@ public static class Streams
         else result = false;
 
         return new OkObjectResult(result);
-
-        // Extra challenge: return answer in a stream
-
-        // var stream = new MemoryStream();
-        // var writer = new StreamWriter(stream);
-            
-        // await writer.WriteAsync(result ? "true" : "false");
-        // await writer.FlushAsync();
-        // stream.Position = 0;
-
-        // return new OkObjectResult(stream);
     }
 }

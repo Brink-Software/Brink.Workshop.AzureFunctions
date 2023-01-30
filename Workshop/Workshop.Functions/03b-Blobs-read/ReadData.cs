@@ -7,14 +7,15 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Workshop.Functions._05_ReadData
+namespace Workshop.Functions._03b_Blobs_read
 {
     public static class ReadData
     {
-        [FunctionName("read-data")]
+        [FunctionName("read-message")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [Blob("workshopdb/workshopdata", FileAccess.Read)] Stream myBlob,
+            //[Blob("workshopdb/workshopdata", FileAccess.Read)] Stream myBlob,
+            [Blob("workshopdb/workshopsecretfile", FileAccess.Read)] Stream myBlob,
             ILogger log)
         {
             using StreamReader reader = new(myBlob, Encoding.UTF8);
@@ -22,5 +23,7 @@ namespace Workshop.Functions._05_ReadData
 
             return new OkObjectResult(content);
         }
+
+
     }
 }
