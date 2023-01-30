@@ -1,4 +1,5 @@
 // Using statements are used to import code from other namespaces.
+
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
 // Namespaces are used to organize code, similar to how you can organize files into folder on your file system.
-namespace Workshop.Functions._01_HelloWorld;
+namespace Workshop.Functions._00_HelloWorld;
 
 // Classes encapsulate related data and functionality. They function as blueprints from which you can instantiate multiple objects of the same class.
 // In the case of Azure Functions, each function is declared using a class with a Run method (see below).

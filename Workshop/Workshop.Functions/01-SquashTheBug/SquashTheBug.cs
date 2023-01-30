@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Workshop.Functions._02_SquashTheBug;
+namespace Workshop.Functions._01_SquashTheBug;
 
 public static class SquashTheBug
 {
