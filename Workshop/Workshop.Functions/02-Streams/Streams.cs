@@ -28,16 +28,5 @@ public static class Streams
         else result = false;
 
         return new OkObjectResult(result);
-
-        // Extra challenge: return answer in a stream
-
-        // var stream = new MemoryStream();
-        // var writer = new StreamWriter(stream);
-            
-        // await writer.WriteAsync(result ? "true" : "false");
-        // await writer.FlushAsync();
-        // stream.Position = 0;
-
-        // return new OkObjectResult(stream);
     }
 }
